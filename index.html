@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html lang="sv">
+
+<huvud>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=enhetsbredd,initial-skala=1">
+
+<title>CS2 Training Pro v0.5</title>
+
+<stil>
+
+*{box-sizing:border-box}
+
+kropp{
+
+marginal:0;bakgrund:#080d18;färg:#eaf3ff;
+
+typsnittsfamilj: Arial, sans-serif;
+
+}
+
+rubrik{
+
+utfyllnad:20px;bakgrund:#101b30;
+
+kant-botten:2px solid #238dff;
+
+display:flex;justify-content:space-between;
+
+justera-objekt:centrera;
+
+}
+
+h1{font-size:23px;color:#55b7ff;margin:0}
+
+liten{färg:#8ea4bd}
+
+.layout{display:flex;min-höjd:470px}
+
+nav
+
+bredd:170px;bakgrund:#101827;
+
+utfyllnad:12px;flex-shrink:0;
+
+}
+
+navigeringsknapp
+
+display:block;bredd:100%;marginal:8px 0;
+
+utfyllnad: 13px 8px; bakgrund: #17263d;
+
+färg:vit;kant:1px solid #29405d;
+
+kant-radie:7px; markör: pekare; text-justering: vänster;
+
+}
+
+nav-knapp.aktiv, nav-knapp:hover{
+
+bakgrund:#174879; kantfärg:#40aaff;
+
+}
+
+main{padding:22px;flex:1;min-width:0}
+
+.panel{
+
+bakgrund:#121e30; kant:1px heldragen #29405d;
+
+kantradius: 12px; utfyllnad: 20px;
+
+maxbredd: 750px;
+
+}
+
+.tab{display:none}
+
+.tab.active{display:block}
+
+.alternativ{
+
+display:flex;align-items:center;
+
+justify-content:space-between;
+
+mellanrum:12px;utfyllnad:12px 0;
+
+kant-botten:1px solid #27364a;
+
+}
+
+input[type=checkbox]{width:20px;height:20px;accent-color:#329bff}
+
+input[type=range]{width:100%;accent-color:#329bff}
+
+.colors{display:flex;gap:9px;flex-wrap:wrap}
+
+.färg{
+
+bredd: 32px; höjd: 32px; kantradie: 7px;
+
+kant:2px solid #65758a; markör: pekare;
+
+}
+
+.color.selected{outline:2px helvit;outline-offset:2px}
+
+välj,knapp.åtgärd{
+
+bakgrund:#1b3452;färg:vit;
+
+kant:1px heldragen #3a85d1; kant-radie:7px;
+
+utfyllnad: 10px;
+
+}
+
+knapp.åtgärd{markör:pekare;marginal-överst:12px}
+
+.förhandsvisning{
+
+marginal:18px auto;maxbredd:800px;
+
+bakgrund:#101b2d;kant:1px solid #345274;
+
+kantradius: 12px; utfyllnad: 15px;
+
+}
+
+#skärm{
+
+position:relativ;höjd:260px;överflöde:dold;
+
+bakgrund:linjär-gradient(#283c50 60%,#34485b 60%);
+
+kantradius: 8px;
+
+}
+
+.vägg{
+
+position:absolut;bakgrund:#526579;
+
+kantlinje: 2px heldragen #71869b;
+
+vänster: 52 %; topp: 30 %; bredd: 22 %; höjd: 70 %;
+
+}
+
+.mål{
+
+position:absolut;bredd:42px;höjd:95px;
+
+vänster: 30 %; övre: 32 %;
+
+}
+
+.person{
+
+position:absolut;infälld:8px;
+
+bakgrund:#9baabc;kantradie:18px 18px 6px 6px;
+
+}
+
+.låda{
+
+position:absolut;infälld:0;
+
+kantlinje:2px heldragen #28ed75;
+
+pekarhändelser: inga;
+
+}
+
+.namn{
+
+position:absolut;överst:-20px;bredd:100%;
+
+text-justera:centrera;fontstorlek:11px;
+
+}
+
+.dist{
+
+position:absolut;botten:-20px;bredd:100%;
+
+text-justera:centrera;fontstorlek:11px;
+
+}
+
+.korshår{
+
+position: absolut; vänster: 50 %; topp: 50 %;
+
+transformera:översätt(-50%,-50%);
+
+font-size:24px;color:vit;
+
+}
+
+.note{färg:#9eb0c8;fontstorlek:13px;radhöjd:1.5}
+
+.hidden{display:none!important}
+
+@media(maxbredd:550px){
+
+nav{bredd:110px}
+
+navigeringsknapp {font-size:12px}
+
+huvud{fyllning:10px}
+
+sidhuvud{fyllning:14px}
+
+h1{font-size:17px}
+
+}
+
+</stil>
+
+</huvud>
+
+<kropp>
+
+<rubrik>
+
+<div>
+
+<h1>CS2 TRAINING PROFESSIONEL</h1>
+
+VERSION 0.5 | UTBILDNINGSDEMO
+
+</div>
+
+<small>CTRL + M</small>
+
+</rubrik>
+
+<div class="layout" id="meny">
+
+<navigering>
+
+<button class="active" onclick="tab('visuals',this)">VISUELLA ELEMENT</button>
+
+<button onclick="tab('colors',this)">FÄRGER</button>
+
+<button onclick="tab('training',this)">UTBILDNING</button>
+
+<button onclick="tab('settings',this)">INSTÄLLNINGAR</button>
+
+<button onclick="tab('configs',this)">KONFIGURATIONER</button>
+
+</nav>
+
+<huvud>
+
+<div class="panel">
+
+<section id="visuals" class="tab active">
+
+<h2>Spelarbilder</h2>
+
+<div class="alternativ">
+
+<span>Visa spelboxar</span>
+
+<input type="checkbox" id="rutor" markerade>
+
+</div>
+
+<div class="alternativ">
+
+<span>Visa bakom vägg (demo)</span>
+
+<input type="checkbox" id="walls">
+
+</div>
+
+<div class="alternativ">
+
+<span>Spelnamn</span>
+
+<input type="checkbox" id="names" markerade>
+
+</div>
+
+<div class="alternativ">
+
+<span>Avstånd</span>
+
+<input type="checkbox" id="avstånd">
+
+</div>
+
+</avsnitt>
+
+<section id="colors" class="tab">
+
+<h2>Lådans utseende</h2>
+
+<p>Välj färg</p>
+
+<div class="färger" id="palett"></div>
+
+<p>Boxstil</p>
+
+<välj id="stil">
+
+<option value="outline">Hel ruta</option>
+
+<option value="corners">Hörnlåda</option>
+
+<option value="filled">Fylld ruta</option>
+
+</välj>
+
+<p>Genomhudighet</p>
+
+<input type="range" id="opacitet" min="10" max="80" värde="30">
+
+<p>Linjetjocklek</p>
+
+<input type="range" id="tjocklek" min="1" max="5" value="2">
+
+</avsnitt>
+
+<section id="utbildning" class="tab">
+
+<h2>Utbildning</h2>
+
+<div class="alternativ">
+
+<span>Rörliga träningsmål</span>
+
+<input type="checkbox" id="flyttar" markerad>
+
+</div>
+
+<p>Rörelsehastighet</p>
+
+<input type="range" id="speed" min="0" max="100" value="50">
+
+<p class="note">Använder simulerade mål, inte riktiga CS2-spelare.</p>
+
+</avsnitt>
+
+<section id="inställningar" class="tab">
+
+<h2>Inställningar</h2>
+
+<p>Öppna/stäng meny: <b>Ctrl + M</b></p>
+
+<p class="note">Kortkommandot fungerar när webbsidan har fokus.</p>
+
+</avsnitt>
+
+<section id="configs" class="tab">
+
+<h2>Konfigurationer</h2>
+
+<button class="action" onclick="save()">Spara inställningar</button>
+
+<button class="action" onclick="reset()">Återställ standard</button>
+
+<p id="meddelande" class="anteckning"></p>
+
+</avsnitt>
+
+</div>
+
+</main>
+
+</div>
+
+<div class="förhandsgranskning">
+
+<h3>LIVEFÖRHANDSVISNING <small>– SIMULERING</small></h3>
+
+<div id="skärm">
+
+<div class="vägg"></div>
+
+<div class="target" id="spelare">
+
+<div class="person"></div>
+
+<div class="box" id="spelarlåda"></div>
+
+<div class="name" id="playername">BOT 01</div>
+
+<div class="dist" id="playerdist">12 m</div>
+
+</div>
+
+<div class="hårkors">+</div>
+
+</div>
+
+<p class="notering">
+
+Förhandsvisning av inställningarna.
+
+Ingen anslutning till CS2.
+
+</p>
+
+</div>
+
+<skript>
+
+const $ = id => dokument.getElementById(id);
+
+konstant färger = [
+
+"#22e96b","#229dff","#ff4b55",
+
+"#ffda37","#ffffff","#ae63ff",
+
+"#ff8a28","#050505"
+
+];
+
+låt färg="#22e96b";
+
+låt start=prestanda.nu();
+
+funktionsflik(id,knapp) {
+
+dokument.querySelectorAll(".tab").forEach(
+
+el=>el.classList.toggle("aktiv", el.id ===id)
+
+);
+
+dokument.querySelectorAll("navigeringsknapp").forEach(
+
+el=>el.classList.remove("active")
+
+);
+
+knapp.klassList.lägg till("aktiv");
+
+}
+
+funktionspalett() {
+
+$("palett").innerHTML="";
+
+färger.förVarje(c=>{
+
+const b=dokument.createElement("knapp");
+
+b.className="color"+(color===c?" selected":"");
+
+b.stil.bakgrund=c;
+
+b.titel=c;
+
+b.onclick=()=>{color=c;palette();update()};
+
+$("palett").appendChild(b);
+
+});
+
+}
+
+funktionsuppdatering() {
+
+const box=$("spelarlåda");
+
+const style=$("stil").värde;
+
+const tjock = $("tjocklek").värde;
+
+const alpha=$("opacitet").värde/100;
+
+box.classList.toggle("dold",!$("rutor").markerad);
+
+$("spelarnamn").classList.toggle("dold",!$("namn").checkad);
+
+$("playerdist").classList.toggle("dold",!$("avstånd").checkad);
+
+box.style.borderColor=färg;
+
+box.style.borderWidth=tjock+"px";
+
+box.style.background=style==="fylld"
+
+?hexAlpha(färg,alfa):"transparent";
+
+box.style.clipPath=style==="hörn"
+
+"polygon(0 0,35% 0,35% 8%,8% 8%,8% 25%,0 25%,0 0,65% 0,100% 0,100% 25%,92% 25%,92% 8%,65% 8%,65% 0,100% 75%,100% 100%,65% 100%,65% 92%,92% 92%,92% 75%,0 75%,8% 75%,8% 92%,35% 92%,35% 100%,0 100%)"
+
+:"ingen";
+
+}
+
+funktion hexAlpha(hex,alfa) {
+
+const r=parseInt(hex.slice(1,3),16);
+
+const g=parseInt(hex.slice(3,5),16);
+
+const b=parseInt(hex.slice(5,7),16);
+
+returnera `rgba(${r},${g},${b},${alpha})`;
+
+}
+
+funktion spara() {
+
+konstant data={
+
+färg,
+
+stil:$("stil").värde,
+
+opacitet:$("opacitet").värde,
+
+tjocklek:$("tjocklek").värde,
+
+hastighet:$("hastighet").värde,
+
+rutor:$("rutor").markerad,
+
+väggar:$("väggar").markerad,
+
+namn:$("namn").markerad,
+
+avstånd:$("avstånd").markerad,
+
+moving:$("moving").checked
+
+};
+
+localStorage.setItem("cs2training",JSON.stringify(data));
+
+$("meddelande").textContent="Inställningarna är sparade.";
+
+}
+
+funktion load() {
+
+försök{
+
+const data=JSON.parse(localStorage.getItem("cs2training"));
+
+om(!data) returnerar;
+
+färg=data.färg||färg;
+
+["stil", "opacitet", "tjocklek", "hastighet"].forEach(k=>{
+
+om (data[k]!==odefinierad) $ (k). värde = data[k];
+
+});
+
+["lådor", "väggar", "namn", "avstånd", "rörelse"].forEach(k=>{
+
+om (data[k]!==odefinierad) $ (k). kontrollerad = data [k];
+
+});
+
+}fånga(e){}
+
+}
+
+funktion återställ() {
+
+localStorage.removeItem("cs2training");
+
+plats.omladdning();
+
+}
+
+dokument.addEventListener("keydown",e=>{
+
+om (e.ctrlKey&&e.key.toLowerCase() ==="m") {
+
+e.preventStandard();
+
+$("meny").classList.toggle("dold");
+
+}
+
+});
+
+dokument.querySelectorAll("input,select").forEach(el=>{
+
+el.addEventListener("input",uppdatering);
+
+});
+
+funktion animera(nu) {
+
+const hastighet=Nummer($("hastighet").värde);
+
+om ($("flyttar").markerad) {
+
+const t=(nu-start)*0,001*hastighet/50;
+
+konstant x=30+Matematik.sin(t)*21;
+
+$("spelare").style.left=x+"%";
+
+}
+
+const x=$("spelare").offsetLeft;
+
+const wall=$("skärm").klientbredd*0.52;
+
+const bakom=x+42>vägg&&x<vägg+$("skärm").klientbredd*.22;
+
+$("spelare").style.opacity=bakom&&!$("väggar").checkad?"0":"1";
+
+requestAnimationFrame(animate);
+
+}
+
+ladda();
+
+palett();
+
+uppdatera();
+
+requestAnimationFrame(animate);
+
+</script>
+
+</body>
+
+</html>
